@@ -1,6 +1,6 @@
 import * as React from 'react'
 import type { GetServerSideProps, NextPage } from 'next'
-import { Map as KaKaoMap, MapMarker } from 'react-kakao-maps-sdk'
+import { Map as KaKaoMap, MapMarker, useInjectKakaoMapApi } from 'react-kakao-maps-sdk'
 import {
   Icon,
   IconButton
@@ -33,6 +33,12 @@ interface Props {
 }
 
 const Map: NextPage<Props> = ({user}) => {
+
+  const { loading, error } = useInjectKakaoMapApi({
+    appkey: "34c385f85c12d6b6fa19a40539c67b02",
+    libraries: ['services']
+  })
+
   const [ isMenuOpen, setIsMenuOpen ] = React.useState(false)
   const [ isInfoOpen, setIsInfoOpen ] = React.useState(false)
   const [ isMyOpen, setIsMyOpen ] = React.useState(false)
@@ -44,6 +50,10 @@ const Map: NextPage<Props> = ({user}) => {
     if(!map) return
     gotoMyLocation()
   }, [map])
+
+  // React.useEffect(() => {
+  //   console.log(loading)
+  // }, [loading])
 
   const onMenuOpen = () => setIsMenuOpen(true)
   const onMenuClose = () => setIsMenuOpen(false)

@@ -8,14 +8,16 @@ const Home: NextPage = () => {
   const router = useRouter()
   const handleKakao = () => {
     const REST_API_KEY = '2c72aa3b5c21971d8786cfe501c5443c' // ssukzip
-    const REDIRECT_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth' : 'https://ssukzip-nextjs.vercel.app/auth'
-    //const REDIRECT_URL = 'https://ssukzip.deta.dev/auth/kakao'
+    const REDIRECT_URL = process.env.NODE_ENV === 'development' ?
+      'http://localhost:3000/auth/kakao' : 'https://ssukzip-nextjs.vercel.app/auth/kakao'
     const url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`
     router.push(url)
   }
   const handleGoogle = () => {
     const CLIENT_ID = '46310202560-l6go9plb32fn6q1r3em6s07u20j11u5e.apps.googleusercontent.com'
-    const REDIRECT_URL = 'https://ssukzip.deta.dev/auth'
+    console.log(process.env.NODE_ENV)
+    const REDIRECT_URL = process.env.NODE_ENV === 'development' ?
+      'http://localhost:3000/auth/google' : 'https://ssukzip-nextjs.vercel.app/auth/google'
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URL}&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&access_type=offline&prompt=consent`
     router.push(url)
   }
@@ -30,10 +32,10 @@ const Home: NextPage = () => {
 
       <main>
       <Stack direction='column' spacing={4}>
-        <Button colorScheme='teal' variant='solid' onClick={handleGoogle}>
+        <Button width='auto' colorScheme='teal' variant='solid' onClick={handleGoogle}>
           Sign in with Google
         </Button>
-        <Button colorScheme='kakao' variant='solid' onClick={handleKakao}>
+        <Button width='auto' colorScheme='kakao' variant='solid' onClick={handleKakao}>
           Login with Kakao
         </Button>
       </Stack>

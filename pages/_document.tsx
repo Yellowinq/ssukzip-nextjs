@@ -15,9 +15,10 @@ const Document = () => {
       <body>
         <Main />
         <NextScript />
-        <Script
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_KEY}&libraries=${KAKAO_LIBRARY}`}
-        />
+        {/* <script
+          async
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_KEY}&libraries=${KAKAO_LIBRARY}&autoload=false`}
+        ></script> */}
       </body>
     </Html>
   )
