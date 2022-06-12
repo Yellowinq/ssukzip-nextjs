@@ -7,9 +7,8 @@ import { useRouter } from 'next/router'
 const Home: NextPage = () => {
   const router = useRouter()
   const handleKakao = () => {
-    // const REST_API_KEY = 'c7924d71b4c86051eeb03d3221f7c7bf' // local
     const REST_API_KEY = '2c72aa3b5c21971d8786cfe501c5443c' // ssukzip
-    const REDIRECT_URL = 'http://localhost:3000/auth'
+    const REDIRECT_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/auth' : 'https://ssukzip-nextjs.vercel.app/auth'
     //const REDIRECT_URL = 'https://ssukzip.deta.dev/auth/kakao'
     const url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`
     router.push(url)
